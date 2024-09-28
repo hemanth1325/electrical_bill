@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css">
+    <title>Bill Summary</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            background-color: #fff;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Paragraphs */
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Strong Text */
+        strong {
+            color: #000;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        /* Button Hover */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Back Link */
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Link Hover */
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bill Summary</h1>
+        <p><strong>Customer ID:</strong> {{ customer_id }}</p>
+        <p><strong>Customer Name:</strong> {{ customer_name }}</p>
+        <p><strong>Address:</strong> {{ address }}</p>
+        <p><strong>Billing Period:</strong> {{ start_date }} to {{ end_date }}</p>
+        <p><strong>Units Consumed:</strong> {{ units_consumed }} kWh</p>
+        <p><strong>Total Amount Due:</strong> ₹{{ total_amount }}</p>
+
+        <form action="/download-bill" method="POST">
+            <input type="hidden" name="customerId" value="{{ customer_id }}">
+            <input type="hidden" name="customerName" value="{{ customer_name }}">
+            <input type="hidden" name="address" value="{{ address }}">
+            <input type="hidden" name="startDate" value="{{ start_date }}">
+            <input type="hidden" name="endDate" value="{{ end_date }}">
+            <input type="hidden" name="unitsConsumed" value="{{ units_consumed }}">
+            <input type="hidden" name="ratePerUnit" value="{{ rate_per_unit }}">
+            <input type="hidden" name="monthlyServiceCharge" value="{{ monthly_service_charge }}">
+            <input type="hidden" name="additionalFees" value="{{ additional_fees }}">
+            <input type="hidden" name="discounts" value="{{ discounts }}">
+           
+        </form>
+
+        <a href="/">Go Back</a>
+    </div>
+</body>
+
+</html>
